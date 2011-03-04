@@ -1,0 +1,13 @@
+#paint_canvas {
+	border:						1px solid #333;
+	margin:						2px auto;
+	background:					#fff;
+	border-radius:				8px;
+	display:					block;
+}
+
+#image_url {
+	margin:						2px auto 6px;
+	text-align:					center;
+	padding:					0;
+}

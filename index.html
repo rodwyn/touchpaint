@@ -2,20 +2,33 @@
 
 <html>
 	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" /> 
 		<link rel="stylesheet" type="text/css" href="paint.css" />
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-		<script src="lib/paint.js"></script> 
+		<script src="paint.js"></script> 
 		<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>
 	</head>
 	<body>
 		<div data-role="page">
+			<!--
 			<header data-role="header"> 
 				<h1>Touch Paint</h1>
 			</header>
+			-->
  
 			<div data-role="content">
-				<canvas id="paint_canvas" />
+				<canvas id="paint_canvas" width="280" height="240" />
+			</div>
+			
+			<div data-role="content">
+				<p id="image_url">&nbsp;</p>
+				<div data-inline="true">
+					<a href="#" id="save_drawing" data-line="true"
+						data-role="button" data-theme="b">Save Drawing</a>
+					<a href="#" id="clear_drawing" data-line="true"
+						data-role="button">Clear Drawing</a>
+				</div>
 			</div>
 		</div>
 	</body>
