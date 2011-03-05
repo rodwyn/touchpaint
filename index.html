@@ -2,6 +2,8 @@
 
 <html>
 	<head>
+		<title>Touch Paint</title>
+		
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" /> 
 		<link rel="stylesheet" type="text/css" href="paint.css" />
 		
@@ -10,25 +12,132 @@
 		<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>
 	</head>
 	<body>
-		<div data-role="page">
-			<!--
-			<header data-role="header"> 
-				<h1>Touch Paint</h1>
+		<div data-role="page" id="home">
+			<header data-role="header" data-theme="b"> 
+				<h1>TouchPaint</h1>
+				<a href="#settings" data-theme="b" data-icon="gear" class="ui-btn-right"
+					data-xtransition="slidedown">Settings</a>
 			</header>
-			-->
  
 			<div data-role="content">
-				<canvas id="paint_canvas" width="280" height="240" />
+				<p>TouchPaint canvas drawing prototype. Start drawing, or change brush and canvas settings.</p>
+				
+				<canvas id="paint_canvas" width="280" height="260"></canvas>
+
+				<div data-role="fieldcontain" class="send_drawing">
+					<label for="email">Send the drawing to email address:</label>
+					<input type="email" name="email" id="email"
+						value="mshafrir@gmail.com" /> <!--autocapitalize="off" />-->
+				</div>
+		
+				<div data-role="fieldcontain">
+					<a href="#" id="save_drawing" data-inline="true"
+						data-role="button" data-theme="b" rel="external">Send Drawing</a>
+					<a href="#" id="clear_drawing" data-inline="true"
+						data-role="button">Clear</a>
+				</div>
 			</div>
+		</div>
+		
+		<div data-role="page" id="settings" data-theme="b">
+			<header data-role="header">
+				<a href="#home" class="ui-btn-left" id="settings_back_button"
+					data-icon="arrow-l" data-direction="reverse">Back</a>
+				<h1>Settings</h1>
+			</header>
 			
 			<div data-role="content">
-				<p id="image_url">&nbsp;</p>
-				<div data-inline="true">
-					<a href="#" id="save_drawing" data-line="true"
-						data-role="button" data-theme="b">Save Drawing</a>
-					<a href="#" id="clear_drawing" data-line="true"
-						data-role="button">Clear Drawing</a>
+				<!--
+				<fieldset data-role="controlgroup" data-type="horizontal"
+					data-role="fieldcontain">
+					<legend>Brush Color</legend>
+
+					<input type="radio" name="color" id="color-red" value="red" checked="checked" />
+					<label for="color-red">Red</label>
+					
+					<input type="radio" name="color" id="color-blue" value="blue"  />
+					<label for="color-blue">Blue</label>
+
+					<input type="radio" name="color" id="color-green" value="green"  />
+					<label for="color-green">Green</label>
+					
+					<label for="color-other">
+						<input type="radio" name="color" id="color-other" value="other" /> Other
+					</label>
+				</fieldset>
+				-->
+				
+				<div data-role="collapsible" data-collapsed="false">
+					<h3>Brush Color</h3>
+					<div data-role="fieldcontain">
+						<label for="slider_red">% Red</label>
+					 	<input type="range" name="slider_red" id="slider_red"
+							class="color_slider" value="81" min="0" max="100"  />
+					</div>
+			
+					<div data-role="fieldcontain">
+						<label for="slider_green">% Green</label>
+					 	<input type="range" name="slider_green" id="slider_green"
+							class="color_slider" value="10" min="0" max="100"  />
+					</div>
+			
+					<div data-role="fieldcontain" data-type="horizontal">
+						<label for="slider_blue">% Blue</label>
+					 	<input type="range" name="slider_blue" id="slider_blue"
+							class="color_slider" value="10" min="0" max="100"  />
+					</div>
+					
+					<div data-role="fieldcontain" style="text-align: center;">
+						<a href="#" id="random_color" data-inline="true"
+							data-role="button" data-theme="b" rel="external">Random Color</a>
+					</div>
 				</div>
+				
+				<div class="ui-br"></div>
+				
+				<div data-role="fieldcontain" data-type="horizontal">
+					<label for="width_slider">Brush Width</label>
+				 	<input type="range" name="width_slider" id="width_slider"
+						value="5" min="1" max="10"  />
+				</div>
+				
+				<div data-role="fieldcontain" data-type="horizontal">
+					<label for="transparency_slider">Transparency</label>
+				 	<input type="range" name="transparency_slider" id="transparency_slider"
+						value="0" min="0" max="100" step="1" />
+				</div>
+				
+				<fieldset data-role="controlgroup" data-type="horizontal"
+					data-role="fieldcontain" id="linejoin_set" class="ui-br smaller">
+					<legend>Line Join</legend>
+
+					<input type="radio" name="linejoin" id="linejoin-round"
+						value="round" checked="checked" />
+					<label for="linejoin-round">Round</label>
+					
+					<input type="radio" name="linejoin" id="linejoin-bevel" value="bevel"  />
+					<label for="linejoin-bevel">Bevel</label>
+
+					<input type="radio" name="linejoin" id="linejoin-miter" value="miter"  />
+					<label for="linejoin-miter">Miter</label>
+				</fieldset>
+				
+				<div class="ui-br"></div>
+				
+				<fieldset data-role="controlgroup" data-type="horizontal"
+					data-role="fieldcontain" id="linecap_set" class="smaller">
+					<legend>Line Cap</legend>
+
+					<input type="radio" name="linecap" id="linecap-butt"
+						value="butt" checked="checked" />
+					<label for="linecap-butt">Butt</label>
+					
+					<input type="radio" name="linecap" id="linecap-round" value="round"  />
+					<label for="linecap-round">Round</label>
+
+					<input type="radio" name="linecap" id="linecap-square" value="square"  />
+					<label for="linecap-square">Square</label>
+				</fieldset>
 			</div>
 		</div>
 	</body>

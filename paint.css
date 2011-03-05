@@ -1,13 +1,44 @@
 #paint_canvas {
 	border:						1px solid #333;
-	margin:						2px auto;
+	margin:						2px 0;
 	background:					#fff;
 	border-radius:				8px;
 	display:					block;
+	width:						100%;
+	-moz-box-shadow:			4px 4px 10px #000;
+	-webkit-box-shadow:			4px 4px 10px #000;
+	box-shadow:					4px 4px 10px #000;
+}
+
+.landscape #paint_canvas {
+	width:						100%;
 }
 
 #image_url {
 	margin:						2px auto 6px;
 	text-align:					center;
 	padding:					0;
+}
+
+#done_dialog {
+	display:					none;
+}
+
+#width_slider {
+	/*
+	visibility:					hidden;
+	*/
+}
+
+fieldset.smaller span.ui-btn-text {
+	font-size:					14px;
+}
+
+input#email {
+	text-align:					center;
+}
+
+#random_color {
+	margin-left:				auto;
+	margin-right:				auto;
 }
