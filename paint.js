@@ -7,6 +7,8 @@ $(function() {
   $canvas = $("#paint_canvas");
   canvas_width = $canvas.attr("width");
   canvas_height = $canvas.attr("height");
+  image_data_field = $("input#image_data");
+  email_field = $("input#email");
   canvas = document.getElementById("paint_canvas");
   ctx = canvas.getContext("2d");
   draw_points = [];
@@ -71,8 +73,6 @@ $(function() {
       return redraw();
     }
   });
-  image_data_field = $("input#image_data");
-  email_field = $("input#email");
   $("#save_drawing").click(function(evt) {
     $.mobile.pageLoading(false);
     return $.post("submit.php", {
@@ -128,8 +128,13 @@ $(function() {
     }
     return _results;
   };
-  return $("a#settings_back_button").click(function(evt) {
+  $("a#settings_back_button").click(function(evt) {
     evt.preventDefault();
     return $.mobile.changePage("#home", "slide", true, true);
   });
+  if (window.localStorage != null) {
+    return email_field.val(window.localStorage['email'] || '').bind("click keyup blur focus", function(evt) {
+      return window.localStorage['email'] = email_field.val();
+    });
+  }
 });

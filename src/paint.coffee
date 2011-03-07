@@ -8,6 +8,9 @@ $ ->
 	canvas_width = $canvas.attr("width")
 	canvas_height = $canvas.attr("height")
 	
+	image_data_field = $("input#image_data")
+	email_field = $("input#email")
+	
 	canvas = document.getElementById("paint_canvas")
 	ctx = canvas.getContext("2d")
 	draw_points = []
@@ -16,16 +19,11 @@ $ ->
 	
 	COLORS = "red": "#cf3333", "green": "#33cf33", "blue": "#3333cf"
 	color_set = $("input[name='color']")
-	
-	#width_slider = null
-	
 	linejoin_set = $("input[name='linejoin']")
-	
 	linecap_set = $("input[name='linecap']")
 	
 	
 	color_val = (pct) -> parseInt(pct * 255 / 100)
-	
 	
 	supports_to_data_url = ->
 		canvas.toDataURL("image/png").indexOf("data:image/png") is 0
@@ -75,10 +73,8 @@ $ ->
 		if draw_on
 			draw_points.push(canvas_pos(evt, not start_draw))
 			redraw()
+
 	
-	
-	image_data_field = $("input#image_data")
-	email_field = $("input#email")
 	$("#save_drawing").click (evt) ->
 		$.mobile.pageLoading(false)
 
@@ -135,3 +131,8 @@ $ ->
 	$("a#settings_back_button").click (evt) ->
 		evt.preventDefault()
 		$.mobile.changePage("#home", "slide", true, true)
+	
+	
+	if window.localStorage?
+		email_field.val(window.localStorage['email'] or '').bind "click keyup blur focus",
+			(evt) -> window.localStorage['email'] = email_field.val()
